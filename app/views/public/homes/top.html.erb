@@ -1,8 +1,28 @@
-<div>
-  <p>ようこそ、ながのCAKEへ！</p></br>
-  <p>このサイトは、ケーキ販売のECサイトになります。</p></br>
-  <p>会員でない方も商品の閲覧はできますが、</p></br>
-  <p>購入には会員登録が必要になります。</p>
-</div>
+<div class="container">
+  <div class="row">
+    <p>ようこそ、ながのCAKEへ！</p></br>
+    <p>このサイトは、ケーキ販売のECサイトになります。</p></br>
+    <p>会員でない方も商品の閲覧はできますが、</p></br>
+    <p>購入には会員登録が必要になります。</p>
+  </div>
+  <div class="row">
+    <h1><strong>新着商品</strong></h1>
+  </div>
 
-<h1>新着商品</h1>
+
+  <div class="row">
+    <div class="d-flex flex-wrap">
+      <% @items.each do |item| %>
+        <%= link_to item_path(item.id), class: "text-decoration-none w-25" do %>
+        <div class="card m-2 p-1 card-hover">
+        <%= image_tag item.get_image, size:'50x50', class: "card-img-top rounded shadow-sm" %>
+        <% end %>
+          <div class="card-body text-body">
+            <h5 class="card-title text-primary"><%= item.name %></h5>
+            <p class="card-text text-primary">¥<%= item.price %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

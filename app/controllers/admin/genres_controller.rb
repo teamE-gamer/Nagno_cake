@@ -1,6 +1,7 @@
 class Admin::GenresController < ApplicationController
 
   def create
+    test1
   end
 
   def index

@@ -1,0 +1,55 @@
+<h3>会員情報編集</h3>
+
+<%= form_with model:@customer,local:true, url: public_information_path, method: :patch do |f| %>
+        <table>
+          <tbody>
+            <tr>
+              <th>名前</th>
+              <td></td>
+              <td><%= f.text_field :last_name, class: "name" %></td>
+              <td></td>
+              <td align="right"><%= f.text_field :first_name, class: "name" %></td>
+            </tr>
+            <tr>
+              <th>フリガナ</th>
+              <td></td>
+              <td><%= f.text_field :last_name_kana, class: "name" %></td>
+              <td></td>
+              <td align="right"><%= f.text_field :first_name_kana, class: "name" %></td>
+            </tr>
+            <tr>
+              <th>郵便番号</th>
+              <td></td>
+              <td><%= f.text_field :post_code, class: "post-code" %></td>
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <th>住所</th>
+              <td></td>
+              <td colspan="3"><%= f.text_field :address, size: "55%", class: "address" %></td>
+            </tr>
+            <tr>
+              <th>電話番号</th>
+              <td></td>
+              <td><%= f.text_field :telephone_number, class: "telephone_number" %></td>
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <th>メールアドレス</th>
+              <td></td>
+              <td><%= f.text_field :email, autocomplete: "email" %></td>
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+              <td><%= f.submit "編集内容を保存",class: 'btn btn-sm btn-success' %></td>
+              <td colspan="2" ></td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+              <td><%= link_to public_unsubscribe_path,class: "btn btn-sm btn-danger" do %>退会する<% end %></td>
+              <td colspan="2" ></td>
+            </tr>
+          </tbody>
+        </table>
+<% end %>

@@ -14,9 +14,12 @@ Rails.application.routes.draw do
   namespace :public do
     get 'homes/about'
 
+    get 'customers/my_page' =>'customers#show', as: :my_page
+    get 'customers/information/edit' =>'customers#edit', as: :informaiton_edit
+    patch 'customers/information' => 'customers#update', as: :information
     get 'customers/unsubscribe' =>'customers#unsubscribe', as: :unsubscribe
     patch 'customers/withdraw' =>'customers#withdraw', as: :withdraw
-    resources :customers, only: [:show,:edit,:update]
+
 
     resources :addresses, only: [:index,:edit,:create,:updaate,:destroy]
 
@@ -48,7 +51,7 @@ Rails.application.routes.draw do
 
     resources :customers, only: [:index,:show,:edit,:update]
 
-    resources :oreder_deatils, only: [:upadate]
+    patch 'orders/:order_id/order_details/:id' => 'order_details#update', as: :order_detail
   end
 
 

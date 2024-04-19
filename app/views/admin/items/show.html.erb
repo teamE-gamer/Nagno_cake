@@ -27,7 +27,7 @@
                 <tr>
                   <th>税込価格</br>
                   (税抜価格)</th>
-                  <td>　<%= number_with_delimiter(@price_with_tax, delimiter: ',') %>(<%= @item.price %>)円</td>
+                  <td>　<%= number_with_delimiter(@price_with_tax, delimiter: ',') %>(<%= number_with_delimiter(@item.price, delimiter: ',') %>)円</td>
                 </tr>
                 <tr>
                   <th>販売ステータス</th>
@@ -37,6 +37,11 @@
           </table>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mx-auto">
+      <%= link_to '編集する', edit_admin_item_path(@item.id), class: "btn btn-lg btn-success" %>
     </div>
   </div>
 </div>

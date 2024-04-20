@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="offset-2 my-5">
+          <div class="d-flex justfy-content-center">
+            <div class="mx-5">
+            <%= image_tag @item.get_image, size:"400x400" %>
+            </div>
+            <div class="mx-5">
+              <div class="my-5"><h1><strong><%= @item.name %></strong></h1></div>
+              <div class="my-5"><h2><%= @item.introduction %></h2></div>
+              <div class="my-5">
+                <h2><span><strong>￥<%= number_with_delimiter(@price_with_tax, delimiter: ',') %></strong>(税込)</h2>
+              </div>
+              <div>
+                <!--プルダウンを追加する必要-->
+              </div>
+              <div>
+                <%= link_to "カートに入れる",public_cart_item_path, method: :patch, class: "btn btn-lg btn-success" %>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>

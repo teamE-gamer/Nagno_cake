@@ -7,37 +7,54 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
+       @order = Order.new(order_params)
+    if params[:order][:select_address] == "0"
+      @order.post_code = current_customer.post_code
+      @order.address = current_custemer.address
+      @order.name = current_customer.first_name + current_customer.last_name
+    elsif params[:order][:select_address] == "1"
+       @address = Address.find(params[:order][:address_id])
+       @order.post_code = @address.post_code
+       @order.address = @address.address
+       @order.name = @address.name
+    elsif params[:order][:select_address] == "2"
+      @order.customer_id = current_customer.id
+    end
+      @cart_items = current_customer.cart_items
+      @order_new = Order.new
+      render :confirm
+    
   end
 
   def create
-    cart_items = current_customer.cart_items.all
-    @order = current_customer.oders.new(order_params)
-    if @order.save
-      cart_items.each do |cart|
-        order_item = Order.new
-        order_item.item_id = cart.item.item.id
-        order_item.order_id = @order.id
-        order_item.order_number = cart.item.total_price
-        order_item.order_quantity = cart.quantity
-        order_item.order_price = cart.item.price
-        order_item.save
-      end
-      redirect_to complete_path
-      cart_items.destroy_all
-    else
-      @order = Order.new(order_params)
-      render :new
+    order = Order.new(order_params)
+    order.save
+    @cart_items = current_customer.cart_items.all
+    
+    @cart_items.each do |cart_item|
+      @order_details = OrderDetail.new
+      @order_details.order_id = order.id
+      @order_details.item_id = cart_item.item.id
+      @order_details.price = cart_item.item.price
+      @order_details.number = cart_item.amount
+      @order_details.making_status = 0
+      @order_details.save!
     end
+    
+    CartItem.destroy_all
+    redirect_to orders_complet_path
+
   end
 
   def index
-    @orders = current_customer
+    @orders = current_customer.orders
     
   end
 
   def show
-    
+    @order = current_customer.orders.find(params[:id])
   end
+
 
   def complete
   end
@@ -50,4 +67,11 @@ def order_params
 end
 
 
+def cartitem_nill
+     cart_items = current_customer.cart_items
+     if cart_items.blank?
+      
+      redirect_to complete_path
+     end
+end
 end

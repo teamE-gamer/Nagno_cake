@@ -10,12 +10,17 @@
               <div class="my-5">
                 <h2><span><strong>￥<%= number_with_delimiter(@price_with_tax, delimiter: ',') %></strong>(税込)</h2>
               </div>
-              <div>
-                <!--プルダウンを追加する必要-->
+
+                  <%= form_with model: @cart_item,local:true, url: public_cart_items_path, method: :post do |f| %>
+              <div class="d-flex justfy-content-center">
+                <div class="mx-5">
+                  <%= f.select :amount, [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[9,9],[10,10]], include_blank: "選択して下さい" %><!--プルダウンを追加する必要-->
+                </div>
+                <div class="mx-5">
+                  <%= f.submit 'カートに入れる', class: "btn btn-sm btn-success" %>
+                </div>
               </div>
-              <div>
-                <%= link_to "カートに入れる",public_cart_item_path, method: :patch, class: "btn btn-lg btn-success" %>
-              </div>
+                <% end %>
             </div>
           </div>
     </div>

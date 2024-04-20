@@ -9,6 +9,9 @@ class Public::ItemsController < ApplicationController
     @item=Item.find(params[:id])
     tax_cal = @item.price * 1.1
     @price_with_tax=tax_cal.floor
+    @cart_item=CartItem.new
+
+
   end
 
   private

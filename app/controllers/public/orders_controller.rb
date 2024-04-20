@@ -10,7 +10,7 @@ class Public::OrdersController < ApplicationController
        @order = Order.new(order_params)
     if params[:order][:select_address] == "0"
       @order.post_code = current_customer.post_code
-      @order.address = current_custemer.address
+      @order.address = current_customer.address
       @order.name = current_customer.first_name + current_customer.last_name
     elsif params[:order][:select_address] == "1"
        @address = Address.find(params[:order][:address_id])
@@ -42,7 +42,7 @@ class Public::OrdersController < ApplicationController
     end
     
     CartItem.destroy_all
-    redirect_to orders_complet_path
+    redirect_to public_complete_path
 
   end
 
@@ -71,7 +71,7 @@ def cartitem_nill
      cart_items = current_customer.cart_items
      if cart_items.blank?
       
-      redirect_to complete_path
+      redirect_to public_complete_path
      end
 end
 end

@@ -10,7 +10,7 @@
   
 
   <p><%= f.radio_button :select_address, 0 %>自身の住所</p>
-     <%= current_end_user.full_address%>
+   
  
  登録済み住所 
   <p> <%= f.radio_button :select_address, 1 %>登録済み住所</p>
@@ -22,7 +22,7 @@
   <table>
     <tr>
       <td>郵便番号</td>
-      <td> <%= f.text_field :postal_code %></td>
+      <td> <%= f.text_field :post_code %></td>
     </tr>
     <tr>
       <td>住所</td>

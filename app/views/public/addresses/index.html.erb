@@ -1,5 +1,5 @@
 <h3>配送先登録/一覧</h3>
-<%= form_with model: @address do |f| %>
+<%= form_with model: @address, url: public_addresses_path do |f| %>
   <div class="row">
     <div class='col-md-8 offset-md-1'>
       <table>
@@ -24,14 +24,14 @@
       </table>
     </div>
   </div>
-<% end %> 
+<% end %>
 
 <% @addresses.each do |address| %>
   <div>
     <p>郵便番号：<%= address.post_code %></p>
     <p>住所：<%= address.address %></p>
     <p>宛名：<%= address.name %></p>
-    <td><%= link_to '編集する', edit_public_address_path(@address), class: "btn btn-sm btn-success edit_address_#{@address.id}" %></td>
-    <td><%= link_to '削除する', @address, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@address.id}"%></td>
+    <td><%= link_to '編集する', edit_public_address_path(address.id), class: "btn btn-sm btn-success" %></td>
+    <td><%= link_to '削除する', public_address_path(address.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
   </div>
 <% end %>

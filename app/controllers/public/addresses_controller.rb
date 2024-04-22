@@ -4,6 +4,7 @@ class Public::AddressesController < ApplicationController
     @address = Address.new(address_params)
     @address.customer_id = current_customer.id
     if @address.save
+      flash[:notice] = "successfully."
       redirect_to public_addresses_path
     else
       @addresses = Address.all

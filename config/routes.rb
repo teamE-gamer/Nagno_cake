@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :admins, controllers: {
+  devise_for :admin, controllers: {
     sessions: "admin/sessions"
   }
 
@@ -21,13 +21,13 @@ Rails.application.routes.draw do
     patch 'customers/withdraw' =>'customers#withdraw', as: :withdraw
 
 
-    resources :addresses, only: [:index,:edit,:create,:updaate,:destroy]
+    resources :addresses, only: [:index,:edit,:create,:update,:destroy]
 
     resources :items, only: [:index,:show]
 
     post 'orders/confirm' =>'orders#confirm', as: :confirm
     get 'orders/complete' =>'orders#complete', as: :complete
-    resources :orders, only: [:new,:index,:show]
+    resources :orders, only: [:new,:create,:index,:show]
 
     resources :cart_items,  only: [:index,:create,:update,:destroy] do
       collection do

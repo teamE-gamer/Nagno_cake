@@ -3,6 +3,10 @@
       <h3 class="my-3 bg-light text-center"><strong><%= @customer.last_name %><%= @customer.first_name %></strong>の会員詳細</h3>
     </div>
 
+    <div class="col-md-2 offset-1">
+      <div class="my-3 bg-light text-center"><%= flash[:notice] %></div>
+    </div>
+
     <div class="col-md-4 offset-1">
       <table>
             <tbody>
@@ -47,7 +51,7 @@
       <div class="mx-5 my-3">
         <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: 'btn btn-sm btn-success' %>
       </div>
-      <div class="mx-5 my-3">
+      <div class="mx-5 my-">
         <%= link_to "注文履歴一覧を見る", public_orders_path, class: 'btn btn-sm btn-primary' %>
       </div>
     </div>

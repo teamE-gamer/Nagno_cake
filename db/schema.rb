@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2024_04_16_061910) do
     t.integer "price", null: false
     t.text "introduction", null: false
     t.boolean "is_active", default: true, null: false
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

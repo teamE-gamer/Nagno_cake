@@ -1,6 +1,6 @@
-<div class="mb-6 text-center">
+<div class='container px-5 px-mt-5'>
   <span class="text-3xl font-bold">
-    注文履歴一覧
+    <h4>注文履歴一覧</h4>
   </span>
 </div>
 
@@ -12,7 +12,7 @@
  <div class="w-full px-3">
     <div class="shadow-soft-xl rounded-2xl bg-clip-border w-full lg:w-3/5 flex  mx-auto">
       <div class="w-full">
-        <table class="border-collapse">
+        <table class="table table-hover table-bordered table-inverse">
           <thead>
             <tr>
               <th>注文日</th>
@@ -35,7 +35,7 @@
                  </td>
                  <td><%= number_to_currency(order.total_payment, unit: "¥", strip_insignificant_zeros: true) %></td>
                  <td><%= order.status %></td>
-                 <td><%= link_to "注文詳細", public_order_path(order.id) %></td>
+                 <td><%= link_to "表示する", public_order_path(order.id) %></td>
               </tr>
             <% end %>
           </tbody>

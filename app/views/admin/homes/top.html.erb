@@ -1,7 +1,3 @@
-<div>
-  <%= flash[:notice] %>
-</div>
-
 注文履歴一覧
 <table>
   <tr>
@@ -13,12 +9,12 @@
     <% @orders.each do |order| %>
       <tr>
           <td>
-            <%= link_to  admin_order_detail_path(order.id) do %>
-              <%=  l order.created_at %>
+              <%= link_to admin_order_path(id: order.id) do %>
+              <%=  order.created_at %>
             <% end %>
           </td>
-          <td><%= order.customer.first_name%><%= order.customer.last_name %></td>
-          <td><%= order.order_details.sum(:number) %></td>
+          <td><%= order.name %></td>
+          <td><%= order.order_details.sum(:amount) %></td>
           <td><%= order.order_status %></td>
       </tr>
     <% end %>

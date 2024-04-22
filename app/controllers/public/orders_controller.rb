@@ -28,9 +28,10 @@ class Public::OrdersController < ApplicationController
 
   def create
     order = Order.new(order_params)
+    order.customer_id = current_customer.id
+    order.shipping_cost = 800
     order.save
     @cart_items = current_customer.cart_items.all
-    
     @cart_items.each do |cart_item|
       @order_details = OrderDetail.new
       @order_details.order_id = order.id
@@ -52,7 +53,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order = current_customer.orders.find(params[:id])
+    @order = Order.find(params[:id])
   end
 
 

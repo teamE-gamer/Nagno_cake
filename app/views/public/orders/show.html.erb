@@ -1,0 +1,30 @@
+<table>
+ 
+    <tr>
+      <td>購入者</td>
+      <td><%= current_customer.last_name %><%= current_customer.first_name %></td>
+    </tr>
+    <tr>
+      <td>注文日</td>
+      <td><%= @order.created_at.to_s(:short) %></td>
+    </tr>
+    <tr>
+      <td>配送先</td>
+      <tr>
+          <td><%= @order.post_code %></td>
+      </tr>
+      <tr>
+          <td><%= @order.address %></td>
+      <tr>
+          <td><%= @order.name %></td>
+      </tr>
+    <tr>
+      <td>支払い方法</td>
+      <td><%= @order.payment_method %></td>
+    </tr>
+    <tr>
+      <td>注文ステータス</td>
+      <td></td>
+    </tr>
+ 
+</table>

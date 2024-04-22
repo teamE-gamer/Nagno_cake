@@ -4,3 +4,29 @@ ja:
       status:
         on_sale: "販売中"
         off_sale: "販売停止中"
+        
+ja:
+  time:
+    formats:
+      short: "%m/%d %H:%M"
+      
+      
+ja:
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      
+ja:
+  time:
+    formats:
+      short: "%m/%d %H:%M"
+      
+ja:
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M"
+      
+ja:
+  time:
+    formats:
+      short: '%m/%d %H:%M'

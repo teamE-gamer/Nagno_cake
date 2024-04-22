@@ -26,7 +26,3 @@ ja:
     formats:
       default: "%Y/%m/%d %H:%M"
       
-ja:
-  time:
-    formats:
-      short: '%m/%d %H:%M'

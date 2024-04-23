@@ -21,5 +21,4 @@ class Customer < ApplicationRecord
     super && (is_active == true)
   end
 
-
 end

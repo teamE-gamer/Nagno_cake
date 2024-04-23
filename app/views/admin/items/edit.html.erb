@@ -1,3 +1,14 @@
+<% if @item.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
 <div class="col-md-2 offset-1">
   <h3 class="my-3 bg-light text-center"><strong>商品新規登録</strong></h3>
 </div>

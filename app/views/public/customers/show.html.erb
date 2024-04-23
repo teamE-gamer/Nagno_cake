@@ -1,43 +1,57 @@
-<h3>マイページ</h3>
-<h3><strong>登録情報</strong></h3>
-<%= link_to public_informaiton_edit_path, class: 'btn btn-sm btn-success' do %>
-編集する
-<% end %>
-<table>
-  <tbody>
-    <tr>
-      <th>氏名</th>
-      <td><%= @customer.last_name %><%= @customer.first_name %></td>
-    </tr>
-    <tr>
-      <th>カナ</th>
-      <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
-    </tr>
-    <tr>
-      <th>郵便番号</th>
-      <td><%= @customer.post_code %></td>
-    </tr>
-    <tr>
-      <th>住所</th>
-      <td><%= @customer.address %></td>
-    </tr>
-    <tr>
-      <th>電話番号</th>
-      <td><%= @customer.telephone_number %></td>
-    </tr>
-    <tr>
-      <th>メールアドレス</th>
-      <td><%= @customer.email %></td>
-    </tr>
-  </tbody>
-</table>
+<div class="col-md-2 offset-1">
+      <h3 class="my-3 bg-light text-center"><strong>マイページ</strong></h3>
+</div>
 
-<h3><strong>配送先</strong></h3>
-<%= link_to public_addresses_path, class: 'btn btn-sm btn-primary' do %>
-一覧を見る
-<% end %>
+<div class="col-md-4 offset-1 d-flex justify-content-start my-3">
+  <div><h3><strong>登録情報</strong></h3></div>
+  <div class="mx-5"><%= link_to "編集する", public_informaiton_edit_path, class: 'btn btn-sm btn-success' %></div>
+</div>
 
-<h3><strong>注文履歴</strong></h3>
-<%= link_to public_orders_path, class: 'btn btn-sm btn-primary' do %>
-一覧を見る
-<% end %>
+
+
+
+
+<div class="col-md-4 offset-1">
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th class="table-secondary">氏名</th>
+        <td><%= @customer.last_name %><%= @customer.first_name %></td>
+      </tr>
+      <tr>
+        <th class="table-secondary">カナ</th>
+        <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
+      </tr>
+      <tr>
+        <th class="table-secondary">郵便番号</th>
+        <td><%= @customer.post_code %></td>
+      </tr>
+      <tr>
+        <th class="table-secondary">住所</th>
+        <td><%= @customer.address %></td>
+      </tr>
+      <tr>
+        <th class="table-secondary">電話番号</th>
+        <td><%= @customer.telephone_number %></td>
+      </tr>
+      <tr>
+        <th class="table-secondary">メールアドレス</th>
+        <td><%= @customer.email %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div class="col-md-4 offset-1 d-flex justify-content-start my-3">
+  <div><h3><strong>配送先　</strong></h3></div>
+  <div class="mx-5"><%= link_to "一覧を見る", public_addresses_path, class: 'btn btn-sm btn-primary' %></div>
+</div>
+
+
+<div class="col-md-4 offset-1 d-flex justify-content-start my-3">
+  <div><h3><strong>注文履歴</strong></h3></div>
+  <div class="mx-5"><%= link_to "一覧を見る", public_orders_path, class: 'btn btn-sm btn-primary' %></div>
+</div>
+

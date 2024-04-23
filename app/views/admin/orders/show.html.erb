@@ -41,10 +41,11 @@
 <% @sum = 0 %>
 <% @sum += order_detail.item.with_tax_price %>
 
-<%= form_with model: order_detail , url: admin_order_details_path(order_detail.id) , method: :patch , local: true do |f| %>
+<%= form_with model: order_detail , url: admin_order_detail_path(order_detail.id) , method: :patch , local: true do |f| %>
     <table>
         <tr>
           <td><%= order_detail.item.name %></td>
+          <td><%= order_detail.amount %></td>
           <td><%= order_detail.item.with_tax_price %></td>
           <td>
             <%= f.select :making_status, OrderDetail.making_statuses %>
@@ -56,6 +57,7 @@
         <td>商品合計</td>
         <td><%= @sum %>円</td>
       </tr>
+      <% end %>
       <tr>
         <td>送料</td>
         <td>800円</td>
@@ -65,4 +67,3 @@
         <td><%= @sum + 800 %>円</td>
       </tr>
   </table>
-<% end %>

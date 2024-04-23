@@ -16,7 +16,7 @@
 
     <tr>
       <td>
-        <%= attachment_image_tag cart_item.item, :image, :fill, 300, 300, format: 'jpeg' %>
+            <%= image_tag cart_item.item.get_image, size: "300×300" %>
         <%= cart_item.item.name %>
       </td>
       <td><%= cart_item.item.with_tax_price %></td>
@@ -70,5 +70,8 @@
   <%= f.hidden_field :address, value: @order.address%>
   <%= f.hidden_field :name, value: @order.name %>
   <%= f.hidden_field :status, value: "wait_payment"%>
+  <% @cart_items.each do |cart_item| %>
+  <%= f.hidden_field :amount, value: cart_item.amount %>
+  <% end %>
   <%= f.submit "注文を確定する" %>
 <% end %>

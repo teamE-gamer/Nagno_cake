@@ -54,7 +54,11 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    if params[:id] == "confirm"
+    redirect_to new_public_order_path
+    else
     @order = Order.find(params[:id])
+    end
   end
 
 

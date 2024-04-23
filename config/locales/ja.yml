@@ -59,3 +59,8 @@ ja:
   time:
     formats:
       default: "%Y/%m/%d %H:%M"
+ja:
+  order:
+    payment_method: # enumの属性名を指定
+      credit_card: "クレジットカード"
+      transfer: "銀行振込"

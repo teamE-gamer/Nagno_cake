@@ -27,7 +27,12 @@
       </tr>
       <tr>
         <td>注文ステータス</td>
-        <td></td>
+        <td> <% if @order.status == 0 %>
+             入金待ち
+        </td>
+             <% else @order.status == 1 %>
+              入金確認
+            <% end %>
       </tr>
     </table>
   </div>

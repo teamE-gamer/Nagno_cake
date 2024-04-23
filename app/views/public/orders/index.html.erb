@@ -1,7 +1,7 @@
 <div class='container px-5 px-mt-5'>
-  <span class="text-3xl font-bold">
+  <div class="bg-light text-3xl font-bold">
     <h4>注文履歴一覧</h4>
-  </span>
+  </div>
 </div>
 
 <% if @orders.count == 0 %>
@@ -14,7 +14,7 @@
       <div class="w-full">
         <table class="table table-hover table-bordered table-inverse">
           <thead>
-            <tr>
+            <tr class="bg-info text-light">
               <th>注文日</th>
               <th>配送先</th>
               <th>注文商品</th>
@@ -23,7 +23,7 @@
               <th>注文詳細</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="bg-light">
             <% @orders.each do |order| %>
               <tr>
                  <td><%= order.created_at %></td>
@@ -34,8 +34,14 @@
                    <% end %>
                  </td>
                  <td><%= number_to_currency(order.total_payment, unit: "¥", strip_insignificant_zeros: true) %></td>
-                 <td><%= order.status %></td>
-                 <td><%= link_to "表示する", public_order_path(order.id) %></td>
+                 <td>
+                     <% if order.status == 0 %>
+                     入金待ち
+                     <% else order.status == 1 %>
+                     入金確認
+                     <% end %>
+                 </td>
+                 <td><%= link_to "表示する", public_order_path(order.id), class: 'btn btn-sm btn-primary' %></td>
               </tr>
             <% end %>
           </tbody>

@@ -21,7 +21,7 @@
     <tr>
       <td>注文ステータス</td>
       <td>
-        <%= f.select :order_status, Order.order_statuses %>
+        <%= f.select :status, Order.order_statuses %>
         <%= f.submit "更新", class: "btn btn-success" %>
       </td>
     </tr>

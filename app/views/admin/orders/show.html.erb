@@ -1,2 +1,78 @@
-<h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+<div class='container px-5 px-mt-5'>
+<div class="row">
+  <div class="col-md-2 offset-1">
+    <h5>注文履歴詳細</h5>
+  </div>
+</div>
+
+<%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
+  <table>
+    <tr>
+      <td>購入者</td>
+         <td><%= @order.customer.last_name + @order.customer.first_name %></td>  
+    </tr>
+    <tr>
+      <td>注文日</td>
+      <td><%= @order.created_at.in_time_zone("Tokyo").strftime("%Y-%m-%d %H:%M:%S") %></td>
+    </tr>
+    <tr>
+      <td>配送先</td>
+      <td><%= @order.post_code%><%= @order.address %><%= @order.name %></td>
+    </tr>
+    <tr>
+      <td>支払い方法</td>
+      <td> <% if @order.payment_method == "credit_card" %>
+              クレジットカード
+           <% elsif @order.payment_method == "transfer" %>
+              銀行振込
+           <% end %></td>
+    </tr>
+    <tr>
+      <td>注文ステータス</td>
+      <td>
+        <%= f.select :status, Order.order_statuses %>
+        <%= f.submit "更新", class: "btn btn-success" %>
+      </td>
+    </tr>
+  </table>
+<% end %>
+<div class="row">
+  <div class="col-md-8">
+
+<table>
+  <tr class='table table-hover table-bordered table-inverse'>
+    <td>商品名</td>
+    <td>単価(税込)</td>
+    <td>数量</td>
+    <td>小計</td>
+    <td>製作ステータス</td>
+  </tr>
+<% @sum = 0 %>
+<% @order_details.each do |order_detail| %>
+  <% @sum += order_detail.item.with_tax_price * order_detail.amount %>
+  <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch, local: true do |f| %>
+    <tr class='table table-hover table-bordered table-inverse'>
+      <td><%= order_detail.item.name %></td>
+      <td><%= order_detail.item.with_tax_price %></td>
+      <td><%= order_detail.amount %></td>
+      <td><%= order_detail.item.with_tax_price * order_detail.amount %></td>
+      
+        <td><%#= f.select :making_status, OrderDetail.making_statuses %>
+        <%= f.submit "更新", class: "btn btn-success" %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
+
+  </table>
+    </div>
+       <div class="col-md-4">
+         <b>商品合計</b>&nbsp;&nbsp;&nbsp;<span style="float:right;"><%= @sum %>円</span></p>
+         <b>送料</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;">800円</span></p>
+         <b>請求金額合計&nbsp;<span style="float:right;"><%= @sum + 800 %>円</span></p></b>
+       </div>
+  </div>
+</div>
+
+
+

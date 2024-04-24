@@ -1,2 +1,52 @@
-<h1>Public::Orders#index</h1>
-<p>Find me in app/views/public/orders/index.html.erb</p>
+<div class="row">
+  <div class="col-md-2 offset-1">
+    <h4>注文履歴一覧</h4>
+  </div>
+</div>
+
+<% if @orders.count == 0 %>
+  <div class='mx-auto max-w-3xl'>
+    <p class='mb-8 text-xl text-center'>No history</p>
+  </div>
+<% else %>
+ <div class="w-full px-3">
+    <div class="shadow-soft-xl rounded-2xl bg-clip-border w-full lg:w-3/5 flex  mx-auto">
+      <div class="w-full">
+        <table class="table table-hover table-bordered table-inverse">
+          <thead>
+            <tr class="bg-info text-light">
+              <th>注文日</th>
+              <th>配送先</th>
+              <th>注文商品</th>
+              <th>支払額</th>
+              <th>ステータス</th>
+              <th>注文詳細</th>
+            </tr>
+          </thead>
+          <tbody class="bg-light">
+            <% @orders.each do |order| %>
+              <tr>
+                 <td><%= order.created_at.in_time_zone("Tokyo").strftime("%Y-%m-%d %H:%M:%S") %></td>
+                 <td><%= order.address %></td>
+                 <td>
+                   <% order.order_details.each do |detail| %>
+                   <%= detail.item.name %><br>
+                   <% end %>
+                 </td>
+                 <td><%= number_to_currency(order.total_payment, strip_insignificant_zeros: true, unit: "円") %></td>
+                 <td>
+                     <% if order.status == 0 %>
+                     入金待ち
+                     <% else order.status == 1 %>
+                     入金確認
+                     <% end %>
+                 </td>
+                 <td><%= link_to "表示する", public_order_path(order.id), class: 'btn btn-sm btn-primary' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>

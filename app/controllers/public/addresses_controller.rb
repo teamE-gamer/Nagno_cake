@@ -1,5 +1,6 @@
 class Public::AddressesController < ApplicationController
   before_action :authenticate_customer!
+  before_action :check_address_existence, only: [:edit, :update, :destroy]
 
   def create
     @address = Address.new(address_params)
@@ -39,5 +40,13 @@ class Public::AddressesController < ApplicationController
   def address_params
     params.require(:address).permit(:post_code, :address, :name)
   end
+
+  def check_address_existence
+    @address=Address.find_by(id: params[:id])
+    unless @address
+      redirect_to public_addresses_path
+    end
+  end
+
 
 end

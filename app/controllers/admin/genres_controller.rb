@@ -1,4 +1,5 @@
 class Admin::GenresController < ApplicationController
+  before_action :check_genre_existence, only: [:edit, :update]
 
   def create
     @genre = Genre.new(genre_params)
@@ -31,9 +32,17 @@ class Admin::GenresController < ApplicationController
   end
 
   private
-  
+
   def genre_params
     params.require(:genre).permit(:name)
+  end
+
+
+  def check_genre_existence
+    @genre=Genre.find_by(id: params[:id])
+    unless @genre
+      redirect_to admin_genres_path
+    end
   end
 
 

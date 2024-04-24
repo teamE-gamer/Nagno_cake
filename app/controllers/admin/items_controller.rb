@@ -1,5 +1,5 @@
 class Admin::ItemsController < ApplicationController
-  
+  before_action :check_item_existence, only: [:show, :edit, :update]
 
   def index
     @items=Item.page(params[:page])
@@ -44,6 +44,15 @@ class Admin::ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :name, :introduction, :price, :status,:genre_id)
+  end
+
+
+
+  def check_item_existence
+    @item=Item.find_by(id: params[:id])
+    unless @item
+      redirect_to admin_items_path
+    end
   end
 
 

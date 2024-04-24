@@ -1,5 +1,11 @@
-注文履歴一覧
-<table>
+
+<div class="row">
+  <div class="col-md-2 offset-1">
+    <h4>注文履歴一覧</h4>
+  </div>
+</div>
+<div class= "col-md-9 offset-1">
+  <table class='table table-hover table-bordered table-inverse'>
   <tr>
     <td>購入日時</td>
     <td>購入者</td>
@@ -10,12 +16,17 @@
       <tr>
           <td>
               <%= link_to admin_order_path(order) do %>
-              <%=  order.created_at %>
+              <%= order.created_at.in_time_zone("Tokyo").strftime("%Y-%m-%d %H:%M:%S") %>
             <% end %>
           </td>
           <td><%= order.customer.last_name + order.customer.first_name %></td>  
           <td><%= order.order_details.sum(:amount) %></td>
-          <td><%= order.order_status %></td>
+          <td><% if order.status == 0 %>
+                 入金待ち
+              <% else order.status == 1 %>
+                 入金確認
+              <% end %>
+           </td>
       </tr>
     <% end %>
 </table>

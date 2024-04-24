@@ -1,8 +1,13 @@
-<h3>注文履歴詳細</h3>
+<div class='container px-3 px-mt-5'>
+<div class="row">
+  <div class="col-md-2 offset-1">
+    <h5>注文履歴詳細</h5>
+  </div>
+</div>
 <div style="display: flex;">
   <div style="margin-right: 20px;">
-    <table>
-      <th>注文情報</th>
+      <b>注文情報</b>
+    <table class="table-hover table-bordered table-inverse">
       <tr>
         <td>注文日</td>
         <td><%= @order.created_at.to_s(:short) %></td>
@@ -37,37 +42,51 @@
     </table>
   </div>
 
-  <div>
-    <table>
-      <th>請求情報</th>
+ <div>
+     <b>請求情報</b>
+    <table class="table-hover table-bordered table-inverse">
       <tr>
         <td>商品合計</td>
-        <td>値</td>
+        <% total = 0 %>
+        <% @order_details.each do |order_detail| %>
+          <% total += order_detail.item.with_tax_price * order_detail.amount %>
+            <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch, local: true do |f| %>
+              <% order_detail.item.with_tax_price * order_detail.amount %>
+            <% end %>
+        <% end %>
+        <td><%= total %></td>
       </tr>
       <tr>
         <td>配送料</td>
         <td>800</td>
       </tr>
+      <tr>
+        <td><b>ご請求額</b>&nbsp;&nbsp;</td>
+        <td><%= @order.total_payment %></td>
+      </tr>
     </table>
   </div>
 </div>
 
-<table>
-  <th>注文内容</th>
+<div>
+  <b><p>注文内容</p></b>
+ <table class="table-hover table-bordered table-inverse">
   <tr>
     <td>商品</td>
     <td>単価(税込)</td>
     <td>個数</td>
     <td>小計</td>
   </tr>
-  <tr>
-    <td>ここは商品名が入る</td>
-    <td>ここに個数が入る</td>
-    <td>ここに小計が入る</td>
-  </tr>
-  <tr>
-    <td>ここは商品名が入る</td>
-    <td>ここに個数が入る</td>
-    <td>ここに小計が入る</td>
+    <% @sum = 0 %>
+<% @order_details.each do |order_detail| %>
+  <% @sum += order_detail.item.with_tax_price * order_detail.amount %>
+  <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch, local: true do |f| %>
+    <tr class='table table-hover table-bordered table-inverse'>
+      <td><%= order_detail.item.name %></td>
+      <td><%= order_detail.item.with_tax_price %></td>
+      <td><%= order_detail.amount %></td>
+      <td><%= order_detail.item.with_tax_price * order_detail.amount %></td>
+      <% end %>
+      <% end %>
   </tr>
 </table>

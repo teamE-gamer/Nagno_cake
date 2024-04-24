@@ -1,5 +1,5 @@
 class Public::OrdersController < ApplicationController
-
+before_action :authenticate_customer!
 
   def new
     @order = Order.new
@@ -59,6 +59,7 @@ class Public::OrdersController < ApplicationController
     else
     @order = Order.find(params[:id])
     end
+     @order_details = OrderDetail.where(order_id: params[:id])
   end
 
 

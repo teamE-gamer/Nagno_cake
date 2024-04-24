@@ -1,29 +1,33 @@
 <div class="container">
-  <div class="row">
-    <p>ようこそ、ながのCAKEへ！</br>
-    このサイトは、ケーキ販売のECサイトになります。</br>
-    会員でない方も商品の閲覧はできますが、</br>
-    購入には会員登録が必要になります。
-    </p>
+  <div class="row my-5 offset-4">
+    <div class="d-flex flex-wrap my-2">
+      <p>ようこそ、ながのCAKEへ！</br>
+      このサイトは、ケーキ販売のECサイトになります。</br>
+      会員でない方も商品の閲覧はできますが、</br>
+      購入には会員登録が必要になります。
+      </p>
+    </div>
   </div>
-  <div class="row">
+  <div class="row my-3 offset-2">
     <h1><strong>新着商品</strong></h1>
   </div>
 
-
-  <div class="row">
-    <div class="d-flex flex-wrap">
-      <% @items.each do |item| %>
-        <%= link_to public_item_path(item.id), class: "text-decoration-none w-25" do %>
-        <div class="card m-2 p-1 card-hover">
-        <%= image_tag item.get_image, size:'50x50', class: "card-img-top rounded shadow-sm" %>
+  <div class="row my-3 offset-2">
+  <% @items.each do |item| %>
+    <div class="col-md-3 mb-2">
+      <div class="card p-1 card-hover">
+        <%= link_to public_item_path(item.id), class: "text-decoration-none" do %>
+          <%= image_tag item.get_image, width: '200', height: '140', class: "card-img-top rounded shadow-sm" %>
         <% end %>
-          <div class="card-body text-body">
-            <h5 class="card-title text-primary"><%= item.name %></h5>
-            <p class="card-text text-primary">¥<%= item.price %></p>
-          </div>
+        <div class="card-body text-body">
+          <h5 class="card-title text-primary"><%= item.name %></h5>
+          <p class="card-text text-primary">¥<%= item.price %></p>
         </div>
-      <% end %>
+      </div>
     </div>
+  <% end %>
+  
+  <div class="row offset-10">
+    <%= link_to "全ての商品を見る>", public_items_path %>
   </div>
 </div>

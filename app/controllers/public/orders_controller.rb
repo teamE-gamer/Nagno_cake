@@ -1,6 +1,8 @@
 class Public::OrdersController < ApplicationController
 before_action :authenticate_customer!
+
 before_action :check_order_existence, only: [:show]
+
   def new
     @order = Order.new
     @addresses = current_customer.addresses

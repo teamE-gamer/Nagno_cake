@@ -5,7 +5,7 @@
   <div class="row">
   <div class="col-8">
      <table class="table table-hover table-bordered table-inverse">
-  <tr class="bg-light">
+  <tr class = "table-warning">
     <td>商品名</td>
     <td>単価</td>
     <td>数量</td>
@@ -18,7 +18,7 @@
 
     <tr>
       <td>
-            <%= image_tag cart_item.item.get_image, size: "300×300" %>
+        <%= image_tag cart_item.item.get_image, size: "300×300" %>
         <%= cart_item.item.name %>
       </td>
       <td><%= cart_item.item.with_tax_price %></td>
@@ -32,15 +32,15 @@
 <div class="col-4">
     <table class="table table-hover table-bordered table-inverse">
   <tr>
-    <td>商品合計</td>
+    <td class = "table-warning">商品合計</td>
     <td><%= @sum %></td>
   </tr>
   <tr>
-    <td>送料</td>
+    <td class = "table-warning">送料</td>
     <td>800</td>
   </tr>
   <tr>
-    <td>請求金額</td>
+    <td class = "table-warning">請求金額</td>
     <td><%= @sum + 800 %></td>
   </tr>
 </table>
@@ -81,7 +81,9 @@
   <% @cart_items.each do |cart_item| %>
   <%= f.hidden_field :amount, value: cart_item.amount %>
   <% end %>
-  <%= f.submit "注文を確定する" %>
+  <div class="text-center">
+  <%= f.submit "注文を確定する", class: 'btn btn-sm btn-success'%>
+  </div>
 <% end %>
 
 </div>

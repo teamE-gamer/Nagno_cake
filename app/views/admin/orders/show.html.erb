@@ -1,6 +1,6 @@
 <div class='container px-5 px-mt-5'>
 <div class="row">
-  <div class="col-md-2 offset-1">
+  <div class="col-md-2 offset-1 bg-light">
     <h5>注文履歴詳細</h5>
   </div>
 </div>
@@ -8,19 +8,23 @@
 <%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
   <table>
     <tr>
-      <td>購入者</td>
-         <td><%= @order.customer.last_name + @order.customer.first_name %></td>  
+      <td><b>購入者</b></td>
+        <td>
+        <%= link_to admin_customer_path(@order.customer.id) do %>
+              <%= @order.customer.last_name + @order.customer.first_name %>
+            <% end %>
+        </td>  
     </tr>
     <tr>
-      <td>注文日</td>
+      <td><b>注文日</b></td>
       <td><%= @order.created_at.in_time_zone("Tokyo").strftime("%Y-%m-%d %H:%M:%S") %></td>
     </tr>
     <tr>
-      <td>配送先</td>
+      <td><b>配送先</b></td>
       <td><%= @order.post_code%><%= @order.address %><%= @order.name %></td>
     </tr>
     <tr>
-      <td>支払い方法</td>
+      <td><b>支払方法</b></td>
       <td> <% if @order.payment_method == "credit_card" %>
               クレジットカード
            <% elsif @order.payment_method == "transfer" %>
@@ -28,7 +32,7 @@
            <% end %></td>
     </tr>
     <tr>
-      <td>注文ステータス</td>
+      <td><b>注文ステータス</b></td>
       <td>
         <%= f.select :status, Order.order_statuses %>
         <%= f.submit "更新", class: "btn btn-success" %>
@@ -40,28 +44,28 @@
   <div class="col-md-8">
 
 <table>
-  <tr class='table table-hover table-bordered table-inverse'>
-    <td>商品名</td>
-    <td>単価(税込)</td>
-    <td>数量</td>
-    <td>小計</td>
-    <td>製作ステータス</td>
+  <tr class='table table-hover table-bordered table-inverse table-warning'>
+    <td><b>商品名</b></td>
+    <td><b>単価(税込)</b></td>
+    <td><b>数量</b></td>
+    <td><b>小計</b></td>
+    <td><b>製作ステータス</b></td>
   </tr>
 <% @sum = 0 %>
 <% @order_details.each do |order_detail| %>
   <% @sum += order_detail.item.with_tax_price * order_detail.amount %>
-  <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch, local: true do |f| %>
     <tr class='table table-hover table-bordered table-inverse'>
       <td><%= order_detail.item.name %></td>
       <td><%= order_detail.item.with_tax_price %></td>
       <td><%= order_detail.amount %></td>
       <td><%= order_detail.item.with_tax_price * order_detail.amount %></td>
-      
-        <td><%#= f.select :making_status, OrderDetail.making_statuses %>
-        <%= f.submit "更新", class: "btn btn-success" %>
-      </td>
+        <td>
+          <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch, local: true do |f| %>
+          <%= f.select :making_status, OrderDetail.making_statuses %>
+          <%= f.submit "更新", class: "btn btn-success" %>
+          <% end %>
+        </td>
     </tr>
-  <% end %>
 <% end %>
 
   </table>

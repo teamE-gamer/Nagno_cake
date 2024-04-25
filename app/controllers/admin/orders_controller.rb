@@ -1,5 +1,5 @@
 class Admin::OrdersController < ApplicationController
-
+  before_action :check_order_existence, only: [:show, :update]
 
   def show
    @order = Order.find(params[:id])
@@ -22,6 +22,14 @@ private
 
     params.require(:order).permit(:status)
 
+  end
+
+
+  def check_order_existence
+    @order=Order.find_by(id: params[:id])
+    unless @order
+      redirect_to admin_path
+    end
   end
 
 

@@ -15,7 +15,7 @@ before_action :check_order_existence, only: [:show]
     if params[:order][:select_address] == "0"
       @order.post_code = current_customer.post_code
       @order.address = current_customer.address
-      @order.name = current_customer.first_name + current_customer.last_name
+      @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:select_address] == "1"
        @address = Address.find(params[:order][:address_id])
        @order.post_code = @address.post_code

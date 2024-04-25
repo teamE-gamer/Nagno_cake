@@ -64,8 +64,8 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def after_sign_up_path(resource)
-    root_path
+  def after_sign_in_path(resource)
+    public_my_page_path
   end
 
 

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     when Admin
       admin_path
     when Customer
-      root_path
+      public_my_page_path
     else
       root_path
     end

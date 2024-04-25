@@ -14,7 +14,7 @@
       <div class="w-full">
         <table class="table table-hover table-bordered table-inverse">
           <thead>
-            <tr class="bg-info text-light">
+             <tr class = "table-warning">
               <th>注文日</th>
               <th>配送先</th>
               <th>注文商品</th>
@@ -23,11 +23,15 @@
               <th>注文詳細</th>
             </tr>
           </thead>
-          <tbody class="bg-light">
+          <tbody>
             <% @orders.each do |order| %>
               <tr>
                  <td><%= order.created_at.in_time_zone("Tokyo").strftime("%Y-%m-%d %H:%M:%S") %></td>
-                 <td><%= order.address %></td>
+                 <td>
+                   〒<%= order.post_code %><br>
+                   <%= order.address %><br>
+                   <%= order.name %>
+                   </td>
                  <td>
                    <% order.order_details.each do |detail| %>
                    <%= detail.item.name %><br>

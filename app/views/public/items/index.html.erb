@@ -1,14 +1,14 @@
 <div class="container">
-  <div class="col-md-3 offset-1">
-    <h3 class="my-3 bg-light text-center"><strong>商品一覧(全<%= "#{@items.count}" %>件)</strong></h3>
-  </div>
-  <div class="row">
-    <div class="offset-2">
-      <div class="d-flex justfy-content-center flex-wrap">
-        <% @items.each do |item| %>
-          <%= link_to public_item_path(item.id) do %>
-            <div class="col-md-4 mb-4">
-              <div><%= image_tag item.get_image, size:"200x200" %></div>
+    <div class="col-md-3 offset-1">
+      <h3 class="my-3 bg-light text-center"><strong>商品一覧(全<%= "#{@items.count}" %>件)</strong></h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="d-flex flex-wrap justfy-content-center">
+            <% @items.each do |item| %>
+              <%= link_to public_item_path(item.id) do %>
+            <div class="mx-5">
+              <div><%= image_tag item.get_image, size:"150x150" %></div>
               <div><strong><%= item.name %></strong></div>
               <div><strong>￥<%= number_with_delimiter((item.price * 1.1).to_i, delimiter: ',') %></strong></div>
             </div>

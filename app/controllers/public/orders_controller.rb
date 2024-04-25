@@ -1,5 +1,6 @@
 class Public::OrdersController < ApplicationController
 before_action :authenticate_customer!
+before_action :checking_cart_items, only: [:new]
 
 before_action :check_order_existence, only: [:show]
 
@@ -76,11 +77,10 @@ def order_params
 end
 
 
-def cartitem_nill
+def checking_cart_items
      cart_items = current_customer.cart_items
      if cart_items.blank?
-
-      redirect_to public_complete_path
+      redirect_to public_items_path
      end
 end
 

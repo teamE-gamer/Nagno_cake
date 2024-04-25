@@ -4,7 +4,7 @@ ja:
       status:
         on_sale: "販売中"
         off_sale: "販売停止中"
-      
+
     order_detail:
       making_status:
         impossible: "着手不可"
@@ -17,7 +17,7 @@ ja:
         confirm: "入金確認"
         doing: "製作中"
         prepare: "発送準備中"
-        complete: "配送済み"
+        complete: "発送済み"
       payment_method:
         credit_card: "クレジットカード"
         transfer: "銀行口座"

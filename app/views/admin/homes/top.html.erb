@@ -19,7 +19,7 @@
               <%= order.created_at.in_time_zone("Tokyo").strftime("%Y-%m-%d %H:%M:%S") %>
             <% end %>
           </td>
-          <td><%= order.customer.last_name + order.customer.first_name %></td>  
+          <td><%= order.customer.last_name + order.customer.first_name %></td>
           <td><%= order.order_details.sum(:amount) %></td>
           <td><% if order.status == '入金待ち' %>
                  入金待ち
@@ -29,8 +29,8 @@
                 制作中
               <% elsif order.status == '発送準備中' %>
                 発送準備中
-              <% else order.status == '配送済み' %>
-                配送済み
+              <% else order.status == '発送済み' %>
+                発送済み
               <% end %>
            </td>
       </tr>

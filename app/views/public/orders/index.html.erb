@@ -39,11 +39,17 @@
                  </td>
                  <td><%= number_to_currency(order.total_payment, strip_insignificant_zeros: true, unit: "円") %></td>
                  <td>
-                     <% if order.status == 0 %>
+                    <% if order.status == '入金待ち' %>
                      入金待ち
-                     <% else order.status == 1 %>
-                     入金確認
-                     <% end %>
+                    <% elsif order.status == '入金確認' %>
+                      入金確認
+                    <% elsif order.status == '製作中' %>
+                      制作中
+                    <% elsif order.status == '発送準備中' %>
+                      発送準備中
+                    <% else order.status == '発送済み' %>
+                      発送済み
+            　       <% end %>
                  </td>
                  <td><%= link_to "表示する", public_order_path(order.id), class: 'btn btn-sm btn-primary' %></td>
               </tr>

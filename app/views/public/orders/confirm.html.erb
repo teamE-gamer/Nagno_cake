@@ -77,7 +77,6 @@
   <%= f.hidden_field :total_payment, value: @sum + 800%>
   <%= f.hidden_field :address, value: @order.address%>
   <%= f.hidden_field :name, value: @order.name %>
-  <%= f.hidden_field :status, value: "wait_payment"%>
   <% @cart_items.each do |cart_item| %>
   <%= f.hidden_field :amount, value: cart_item.amount %>
   <% end %>

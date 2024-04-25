@@ -21,10 +21,16 @@
           </td>
           <td><%= order.customer.last_name + order.customer.first_name %></td>  
           <td><%= order.order_details.sum(:amount) %></td>
-          <td><% if order.status == 0 %>
+          <td><% if order.status == '入金待ち' %>
                  入金待ち
-              <% else order.status == 1 %>
+              <% elsif order.status == '入金確認' %>
                  入金確認
+              <% elsif order.status == '製作中' %>
+                制作中
+              <% elsif order.status == '発送準備中' %>
+                発送準備中
+              <% else order.status == '配送済み' %>
+                配送済み
               <% end %>
            </td>
       </tr>

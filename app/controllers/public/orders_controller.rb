@@ -2,10 +2,12 @@ class Public::OrdersController < ApplicationController
 before_action :authenticate_customer!
 before_action :checking_cart_items, only: [:new]
 
+before_action :check_order_existence, only: [:show]
+
   def new
     @order = Order.new
     @addresses = current_customer.addresses
-    
+
   end
 
   def confirm
@@ -25,7 +27,7 @@ before_action :checking_cart_items, only: [:new]
       @cart_items = current_customer.cart_items
       @order_new = Order.new
       render :confirm
-    
+
   end
 
   def create
@@ -43,7 +45,7 @@ before_action :checking_cart_items, only: [:new]
       @order_details.making_status = 0
       @order_details.save!
     end
-    
+
     CartItem.destroy_all
     redirect_to public_complete_path
 
@@ -51,7 +53,7 @@ before_action :checking_cart_items, only: [:new]
 
   def index
     @orders = current_customer.orders
-    
+
   end
 
   def show
@@ -78,8 +80,16 @@ end
 def checking_cart_items
      cart_items = current_customer.cart_items
      if cart_items.blank?
-      
       redirect_to public_items_path
      end
 end
+
+def check_order_existence
+  @order=Order.find_by(id: params[:id])
+  unless @order
+      redirect_to public_orders_path
+  end
+end
+
+
 end

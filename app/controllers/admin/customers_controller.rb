@@ -1,4 +1,5 @@
 class Admin::CustomersController < ApplicationController
+  before_action :check_customer_existence, only: [:show, :edit, :update]
 
 
   def index
@@ -36,6 +37,15 @@ class Admin::CustomersController < ApplicationController
                                        :email,
                                        :is_active
                                        )
+    end
+
+
+
+    def check_customer_existence
+      @customer=Customer.find_by(id: params[:id])
+      unless @customer
+        redirect_to admin_customers_path
+      end
     end
 
 

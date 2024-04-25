@@ -32,12 +32,18 @@
       </tr>
       <tr>
         <td class = "table-warning">注文ステータス</td>
-        <td> <% if @order.status == 0 %>
-             入金待ち
-        </td>
-             <% else @order.status == 1 %>
-              入金確認
-            <% end %>
+        <td> <% if order.status == '入金待ち' %>
+                     入金待ち
+                    <% elsif order.status == '入金確認' %>
+                      入金確認
+                    <% elsif order.status == '製作中' %>
+                      制作中
+                    <% elsif order.status == '発送準備中' %>
+                      発送準備中
+                    <% else order.status == '発送済み' %>
+                      発送済み
+            　       <% end %>
+          </td>
       </tr>
     </table>
   </div>

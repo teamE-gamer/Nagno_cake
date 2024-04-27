@@ -1,0 +1,83 @@
+<div class='container px-5 px-mt-5'>
+<div class="row">
+  <div class="col-md-2 offset-1 bg-light">
+    <h5>注文履歴詳細</h5>
+  </div>
+</div>
+
+<%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
+  <table>
+    <tr>
+      <td><b>購入者</b></td>
+        <td>
+        <%= link_to admin_customer_path(@order.customer.id) do %>
+              <%= @order.customer.last_name + @order.customer.first_name %>
+            <% end %>
+        </td>
+    </tr>
+    <tr>
+      <td><b>注文日</b></td>
+      <td><%= @order.created_at.in_time_zone("Tokyo").strftime("%Y-%m-%d %H:%M:%S") %></td>
+    </tr>
+    <tr>
+      <td><b>配送先</b></td>
+      <td><%= @order.post_code%><%= @order.address %><%= @order.name %></td>
+    </tr>
+    <tr>
+      <td><b>支払方法</b></td>
+      <td> <% if @order.payment_method == "credit_card" %>
+              クレジットカード
+           <% elsif @order.payment_method == "transfer" %>
+              銀行振込
+           <% end %></td>
+    </tr>
+    <tr>
+      <td><b>注文ステータス</b></td>
+      <td>
+       <%= f.select :status, ['入金待ち','入金確認','製作中','発送準備中','発送済み'] %>
+        <%= f.submit "更新", class: "btn btn-success" %>
+      </td>
+    </tr>
+  </table>
+<% end %>
+<div class="row">
+  <div class="col-md-8">
+
+<table>
+  <tr class='table table-hover table-bordered table-inverse table-warning'>
+    <td><b>商品名</b></td>
+    <td><b>単価(税込)</b></td>
+    <td><b>数量</b></td>
+    <td><b>小計</b></td>
+    <td><b>製作ステータス</b></td>
+  </tr>
+<% @sum = 0 %>
+<% @order_details.each do |order_detail| %>
+  <% @sum += order_detail.item.with_tax_price * order_detail.amount %>
+    <tr class='table table-hover table-bordered table-inverse'>
+      <td><%= order_detail.item.name %></td>
+      <td><%= order_detail.item.with_tax_price %></td>
+      <td><%= order_detail.amount %></td>
+      <td><%= order_detail.item.with_tax_price * order_detail.amount %></td>
+        <td>
+          <%= form_with model: order_detail, namespace: "order_detail_#{order_detail.id}", url: admin_order_detail_url(order_detail.order_id, id: order_detail.id), method: :patch, local: true do |f| %>
+          <%= f.select :making_status, ['着手不可','製作待ち','製作中','製作完了'] %>
+          <%= f.submit "更新", class: "btn btn-success" %>
+          <% end %>
+        </td>
+    </tr>
+<% end %>
+
+
+  </table>
+    </div>
+       <div class="col-md-4">
+         <b>商品合計</b>&nbsp;&nbsp;&nbsp;<span style="float:right;"><%= @sum %>円</span></p>
+         <b>送料</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;">800円</span></p>
+         <b>請求金額合計&nbsp;<span style="float:right;"><%= @sum + 800 %>円</span></p></b>
+       </div>
+  </div>
+</div>
+
+
+

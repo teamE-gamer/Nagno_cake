@@ -1,0 +1,44 @@
+<%= flash[:notice] %>
+
+
+<div class="col-md-1 offset-2">
+  <h3 class="my-3 bg-light text-center"><strong>ログイン</strong></h3>
+</div>
+
+<div class='col-md-3 offset-md-2'>
+  <h4 class="my-3 bg-light text-center">会員の方はこちらからログイン</h4>
+</div>
+
+<div class="container">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row">
+      <div class='col-md-8 offset-md-1'>
+        <table>
+          <tbody>
+            <tr>
+              <th>メールアドレス</th>
+              <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+            </tr>
+            <tr>
+              <th>パスワード</th>
+              <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+            </tr>
+            <tr>
+              <th></th>
+              <td><%= f.submit "ログイン",class: 'btn btn-sm btn-primary' %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class='col-md-3 offset-md-2'>
+  <h4 class="my-3 bg-light text-center">会員登録がお済みでない方</h4>
+</div>
+
+<div class="container">
+  <div class='col-md-4 offset-md-1'>
+    <%= render "public/shared/links" %>
+  </div>
+</div>
